@@ -85,16 +85,20 @@ router.get("/users", async function (req, res, next) {
 
 router.post("/post", async function (req, res, next) {
   try {
-    const { postHead, postBody, Author } = req.body;
-    const post = new Posts({
-      postHead,
-      postBody,
-      Author,
-    });
-    await post.save();
-    res.json({ success: true, post });
+    const { postHead, postBody, Author, password } = req.body;
+    if(password === 'dupa123cycki'){
+      const post = new Posts({
+        postHead,
+        postBody,
+        Author,
+      });
+      await post.save();
+      res.json({ success: true, post });
+    } else {
+      throw new Error('Wrong password');
+    }
   } catch (error) {
-    res.json({ success: false, error });
+    res.json({ success: false, error: error.message });
   }
 });
 //GET POST WITH EXACT _id
