@@ -113,7 +113,7 @@ router.get("/posts", async function (req, res, next) {
   const posts = await Posts.find();
   res.send(posts);
 });
-
+//POST CHANGE 
 router.put("/post", async function (req, res, next) {
   const post = await Posts.findOne({
     _id: req.body._id,
