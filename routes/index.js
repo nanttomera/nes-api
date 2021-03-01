@@ -38,7 +38,7 @@ router.get(
   function (req, res) {
     // Successful authentication, redirect home.
     // res.json(req.user);
-    res.redirect('https://www.nes-ark.pl/');
+    res.redirect('https://nes-ark.pl');
   }
 );
 
