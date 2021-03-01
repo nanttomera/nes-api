@@ -33,25 +33,24 @@ passport.use(
       apiKey: STEAM_API_KEY,
     },
     async function (identifier, profile, done) {
-      let user = await _User.findOne( {openId: identifier})
+      let user = await _User.findOne({ openId: identifier });
 
-      if (!user){
+      if (!user) {
         user = new _User({
           openId: identifier,
           profile,
-        })
+        });
         await user.save();
       }
-        // To keep the example simple, the user's Steam profile is returned to
-        // represent the logged-in user.  In a typical application, you would want
-        // to associate the Steam account with a user record in your database,
-        // and return that user instead.
+      // To keep the example simple, the user's Steam profile is returned to
+      // represent the logged-in user.  In a typical application, you would want
+      // to associate the Steam account with a user record in your database,
+      // and return that user instead.
 
-        //User.findByOpenID({ openId: identifier }, function (err, user) {
+      //User.findByOpenID({ openId: identifier }, function (err, user) {
       // return done(err, user);
-        // profile.identifier = identifier;
-        return done(null, user);
-     
+      // profile.identifier = identifier;
+      return done(null, user);
     }
   )
 );
@@ -60,7 +59,7 @@ passport.use(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(cors());
+app.use(cors({origin: 'https://nes-ark.pl/', optionsSuccessStatus: 200}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

@@ -42,9 +42,13 @@ router.get(
   }
 );
 
-router.get('/dupa',(req,res,next) => {
-  res.send(req.isAuthenticated() ? 'Siema' + req.user.profile.displayName : 'Spierdalaj');
-})
+router.get("/dupa", (req, res, next) => {
+  res.send(
+    req.isAuthenticated()
+      ? "Siema " + req.user.profile.displayName
+      : "Spierdalaj"
+  );
+});
 
 // steam passport end
 

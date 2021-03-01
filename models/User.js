@@ -1,17 +1,20 @@
 const { model, Schema } = require("mongoose");
-const bcrypt = require('bcryptjs');
-const UserSchema = new Schema({
-  openId: {
-    type: String,
-    require: true,
-    unique: true,
+const bcrypt = require("bcryptjs");
+const UserSchema = new Schema(
+  {
+    openId: {
+      type: String,
+      require: true,
+      unique: true,
+    },
+    profile: {
+      type: Schema.Types.Mixed,
+    },
   },
-  profile: {
-    type: Schema.Types.Mixed
-  },
-}, {
-  timestamps: true
-});
+  {
+    timestamps: true,
+  }
+);
 //hashpass
 // UserSchema.pre("save",async function (next) {
 //     if (this.isNew) {
@@ -38,7 +41,7 @@ UserSchema.statics.hashPassword = function (plainPassword) {
 };
 
 UserSchema.methods.checkPassword = async function (plainPassword) {
-  return await bcrypt.compare(plainPassword, this.password)
-}
+  return await bcrypt.compare(plainPassword, this.password);
+};
 
 module.exports = model("User", UserSchema);

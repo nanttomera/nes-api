@@ -20,13 +20,16 @@ app.set("port", port);
  */
 let server;
 mongoose
-  .connect("mongodb+srv://rado:12345x@store.t5jig.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {
-    keepAlive: 30000,
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-    useFindAndModify: false,
-  })
+  .connect(
+    "mongodb+srv://rado:12345x@store.t5jig.gcp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority",
+    {
+      keepAlive: 30000,
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useCreateIndex: true,
+      useFindAndModify: false,
+    }
+  )
   .then(() => {
     console.log("Succesfuly connected to Database!");
     server = http.createServer(app);
