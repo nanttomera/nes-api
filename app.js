@@ -59,7 +59,7 @@ passport.use(
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
-app.use(cors({origin: 'https://nes-ark.pl', optionsSuccessStatus: 200}));
+app.use(cors({origin: 'https://nes-ark.pl',credentials: true , optionsSuccessStatus: 200}));
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
