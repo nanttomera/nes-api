@@ -139,7 +139,7 @@ router.get("/post/:id", async function (req, res, next) {
 // GET ALL THE POSTS
 router.get("/posts", async function (req, res, next) {
   const posts = await Posts.find();
-  res.send(posts);
+  res.send(req.user);
 });
 //POST CHANGE
 router.put("/post", async function (req, res, next) {
