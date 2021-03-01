@@ -28,8 +28,8 @@ const STEAM_API_KEY = "5A7156714F8A3DC54F0C8582AC5C05E4x";
 passport.use(
   new SteamStrategy(
     {
-      returnURL: "http://localhost:3001/auth/steam/return",
-      realm: "http://localhost:3001/",
+      returnURL: "https://api.nes-ark.pl/auth/steam/return",
+      realm: "https://api.nes-ark.pl/",
       apiKey: STEAM_API_KEY,
     },
     function (identifier, profile, done) {
