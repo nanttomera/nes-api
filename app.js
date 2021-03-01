@@ -32,15 +32,26 @@ passport.use(
       realm: "https://api.nes-ark.pl/",
       apiKey: STEAM_API_KEY,
     },
-    function (identifier, profile, done) {
-      process.nextTick(function () {
+    async function (identifier, profile, done) {
+      let user = await _User.findOne( {openId: identifier})
+
+      if (!user){
+        user = new _User({
+          openId,
+          profile,
+        })
+        await user.save();
+      }
         // To keep the example simple, the user's Steam profile is returned to
         // represent the logged-in user.  In a typical application, you would want
         // to associate the Steam account with a user record in your database,
         // and return that user instead.
-        profile.identifier = identifier;
-        return done(null, profile);
-      });
+
+        //User.findByOpenID({ openId: identifier }, function (err, user) {
+      // return done(err, user);
+        // profile.identifier = identifier;
+        return done(null, user);
+     
     }
   )
 );

@@ -1,27 +1,25 @@
 const { model, Schema } = require("mongoose");
 const bcrypt = require('bcryptjs');
 const UserSchema = new Schema({
-  email: {
+  openId: {
     type: String,
     require: true,
     unique: true,
   },
-  password: {
-    type: String,
-    require: true,
+  profile: {
+    type: Schema.Types.Mixed
   },
-  name: String,
 }, {
   timestamps: true
 });
 //hashpass
-UserSchema.pre("save",async function (next) {
-    if (this.isNew) {
-      const User = model("User");
-      this.password = await User.hashPassword(this.password);
-    }
-    next();
-})
+// UserSchema.pre("save",async function (next) {
+//     if (this.isNew) {
+//       const User = model("User");
+//       this.password = await User.hashPassword(this.password);
+//     }
+//     next();
+// })
 
 UserSchema.statics.hashPassword = function (plainPassword) {
   return new Promise((resolve, reject) => {
