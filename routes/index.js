@@ -34,11 +34,11 @@ router.get("/auth/steam", passport.authenticate("steam"));
 
 router.get(
   "/auth/steam/return",
-  passport.authenticate("steam", { failureRedirect: "/login" }),
+  passport.authenticate("steam", { failureRedirect: "/auth/steam" }),
   function (req, res) {
     // Successful authentication, redirect home.
-    res.json(req.user);
-    // res.redirect('http://localhost:3000/');
+    // res.json(req.user);
+    res.redirect('https://www.nes-ark.pl/');
   }
 );
 
