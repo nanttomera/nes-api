@@ -37,7 +37,7 @@ passport.use(
 
       if (!user){
         user = new _User({
-          openId,
+          openId: identifier,
           profile,
         })
         await user.save();
