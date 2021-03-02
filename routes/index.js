@@ -20,6 +20,7 @@ const serverCheck = async () => {
       type: "arkse",
       host: "51.38.145.171",
       port: 7777,
+      socketTimeout: 6000,
     });
     serverStatus = state;
     whenSaved = moment();
