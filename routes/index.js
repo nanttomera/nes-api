@@ -18,7 +18,7 @@ const serverCheck = async () => {
     }
     const state = await Gamedig.query({
       type: "arkse",
-      host: "51.38.145.171",
+      host: "51.38.145.174",
       port: 7777,
       socketTimeout: 6000,
     });
