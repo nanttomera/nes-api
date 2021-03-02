@@ -6,6 +6,7 @@ const moment = require("moment");
 const Posts = require("../models/Post");
 const passport = require("passport");
 const SteamStrategy = require("passport-steam");
+const axios = require("axios");
 
 let serverStatus;
 let whenSaved;
@@ -16,20 +17,24 @@ const serverCheck = async () => {
     if (whenSaved && !now.isAfter(whenSaved.add(10, "minutes"))) {
       return;
     }
-    const state = await Gamedig.query({
-      type: "arkse",
-      host: "localhost",
-      port: 7777,
-      socketTimeout: 2000,
-    });
-    serverStatus = state;
+    await axios
+      .get("https://arkservers.net/api/query/51.38.145.171:27015")
+      .then((info) => {
+        console.log('Succesfuly fetched Server Status');
+        serverStatus = info.data;
+      });    
     whenSaved = moment();
-    console.log('Server status is', serverStatus)
   } catch (error) {
     console.log("Server is offline");
   }
 };
 
+// //await Gamedig.query({
+//   type: "arkse",
+//   host: "localhost",
+//   port: 7777,
+//   socketTimeout: 2000,
+// });
 //steam-passport
 
 router.get("/auth/steam", passport.authenticate("steam"));
@@ -40,7 +45,7 @@ router.get(
   function (req, res) {
     // Successful authentication, redirect home.
     // res.json(req.user);
-    res.redirect('https://nes-ark.pl');
+    res.redirect("https://nes-ark.pl");
   }
 );
 
