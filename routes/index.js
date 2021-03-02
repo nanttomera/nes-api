@@ -23,6 +23,7 @@ const serverCheck = async () => {
     });
     serverStatus = state;
     whenSaved = moment();
+    console.log('Server status is', serverStatus)
   } catch (error) {
     console.log("Server is offline");
   }
@@ -53,21 +54,21 @@ router.get("/dupa", (req, res, next) => {
 // steam passport end
 
 /* GET home page. */
-router.get("/hello", function (req, res, next) {
-  res.render("index", { title: "Express" });
-});
+// router.get("/hello", function (req, res, next) {
+//   res.render("index", { title: "Express" });
+// });
 
 router.get("/core", async function (req, res, next) {
   await serverCheck();
   res.send(serverStatus);
 });
 
-router.get("/user/:id", async function (req, res, next) {
-  const users = await User.findOne({
-    _id: req.params.id,
-  });
-  res.send(users);
-});
+// router.get("/user/:id", async function (req, res, next) {
+//   const users = await User.findOne({
+//     _id: req.params.id,
+//   });
+//   res.send(users);
+// });
 
 //dodawanie usera
 
@@ -86,21 +87,21 @@ router.post("/user", async function (req, res, next) {
   }
 });
 
-router.put("/user", async function (req, res, next) {
-  const user = await _User.findOne({
-    _id: req.body._id,
-  });
-  // const passwordOk = await user.checkPassword(req.body.password);
-  // if (!passwordOk){
-  //   return res.json({success: false, message: "Incorrect password"})
-  // };
+// router.put("/user", async function (req, res, next) {
+//   const user = await _User.findOne({
+//     _id: req.body._id,
+//   });
+//   // const passwordOk = await user.checkPassword(req.body.password);
+//   // if (!passwordOk){
+//   //   return res.json({success: false, message: "Incorrect password"})
+//   // };
 
-  user.name = req.body.name;
-  user.password = req.body.password;
-  user.email = req.body.email;
-  await user.save();
-  res.json({ success: true, user });
-});
+//   user.name = req.body.name;
+//   user.password = req.body.password;
+//   user.email = req.body.email;
+//   await user.save();
+//   res.json({ success: true, user });
+// });
 
 router.get("/users", async function (req, res, next) {
   const users = await _User.find();
