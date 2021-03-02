@@ -18,9 +18,9 @@ const serverCheck = async () => {
     }
     const state = await Gamedig.query({
       type: "arkse",
-      host: "51.38.145.174",
+      host: "localhost",
       port: 7777,
-      socketTimeout: 6000,
+      socketTimeout: 2000,
     });
     serverStatus = state;
     whenSaved = moment();
