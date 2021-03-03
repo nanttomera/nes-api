@@ -32,6 +32,7 @@ passport.use(
       realm: "https://api.nes-ark.pl/",
       apiKey: STEAM_API_KEY,
     },
+    //tutaj odbywa sie validate user funkcja
     async function (identifier, profile, done) {
       let user = await _User.findOne({ openId: identifier });
 
@@ -83,9 +84,11 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
+//session na passporcie po zalogowaniu tworzy cookies (w tle sie dzieje?)
+
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
-
+//app.use users mozna chyba wyebac
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
   next(createError(404));

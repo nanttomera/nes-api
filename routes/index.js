@@ -20,21 +20,15 @@ const serverCheck = async () => {
     await axios
       .get("https://arkservers.net/api/query/51.38.145.171:27015")
       .then((info) => {
-        console.log('Succesfuly fetched Server Status');
+        console.log("Succesfuly fetched Server Status");
         serverStatus = info.data;
-      });    
+      });
     whenSaved = moment();
   } catch (error) {
     console.log("Server is offline");
   }
 };
 
-// //await Gamedig.query({
-//   type: "arkse",
-//   host: "localhost",
-//   port: 7777,
-//   socketTimeout: 2000,
-// });
 //steam-passport
 
 router.get("/auth/steam", passport.authenticate("steam"));
@@ -49,13 +43,13 @@ router.get(
   }
 );
 
-router.get("/dupa", (req, res, next) => {
-  res.send(
-    req.isAuthenticated()
-      ? "Siema " + req.user.profile.displayName
-      : "Spierdalaj"
-  );
-});
+// router.get("/dupa", (req, res, next) => {
+//   res.send(
+//     req.isAuthenticated()
+//       ? "Siema " + req.user.profile.displayName
+//       : "Spierdalaj"
+//   );
+// });
 
 // steam passport end
 
@@ -78,20 +72,20 @@ router.get("/core", async function (req, res, next) {
 
 //dodawanie usera
 
-router.post("/user", async function (req, res, next) {
-  try {
-    const { email, name, password } = req.body;
-    const user = new _User({
-      email,
-      name,
-      password,
-    });
-    await user.save();
-    res.json({ success: true, user });
-  } catch (error) {
-    res.json({ success: false, error });
-  }
-});
+// router.post("/user", async function (req, res, next) {
+//   try {
+//     const { email, name, password } = req.body;
+//     const user = new _User({
+//       email,
+//       name,
+//       password,
+//     });
+//     await user.save();
+//     res.json({ success: true, user });
+//   } catch (error) {
+//     res.json({ success: false, error });
+//   }
+// });
 
 // router.put("/user", async function (req, res, next) {
 //   const user = await _User.findOne({
@@ -109,10 +103,10 @@ router.post("/user", async function (req, res, next) {
 //   res.json({ success: true, user });
 // });
 
-router.get("/users", async function (req, res, next) {
-  const users = await _User.find();
-  res.send(users);
-});
+// router.get("/users", async function (req, res, next) {
+//   const users = await _User.find();
+//   res.send(users);
+// });
 
 //
 
